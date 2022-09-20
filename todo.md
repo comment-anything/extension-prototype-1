@@ -3,7 +3,7 @@
 check [match pattern](https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/Match_patterns)
 
 
-
+# Add the button
 
 # What permissions do we need
 
@@ -11,7 +11,7 @@ https://extensionworkshop.com/documentation/develop/request-the-right-permission
 
 
 
-Haven't tested with our own back end yet
+Haven't tested with our own back end yet but we will have to look at how a server manages [CORS](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS) requests
 
 
 # Typescript
