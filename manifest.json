@@ -15,5 +15,17 @@
             "matches": ["<all_urls>"],
             "js": ["populate.js"]
         }
+    ],
+
+    "content_security_policy": {
+        "extension_pages": "script-src 'self' https://example.com; object-src 'self'"
+    },
+      
+
+    "permissions": [
+        "webRequest",
+        "cookies",
+        "scripting",
+        "webNavigation"
     ]
 }

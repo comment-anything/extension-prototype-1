@@ -11,7 +11,9 @@ function body() {
 }
 
 function div() {
-    return document.createElement("div")
+    let div = document.createElement("div")
+    div.style.userSelect = "none"
+    return div
 }
 
 
@@ -22,11 +24,12 @@ function position(div) {
 const pageloaders = []
 
 class Style {
-    static absolute(el) {
+    static fixed(el) {
         el = C.asEl(el)
-        el.style.position = "absolute"
+        el.style.position = "fixed"
         el.style.top = "0px"
         el.style.left = "0px"
+        el.style.zIndex = "500"
     
     }
     static nerd(el, size, code) {
@@ -85,7 +88,7 @@ class Ui extends C{
         super(container_element == undefined ? document.body : container_element)
         this.url = new Url(this)
         this.whois = new WhoIs(this)
-        Style.absolute(this.el)
+        Style.fixed(this.el)
         Style.nerd(this.el, 18, (5 << 5) | 0b10000)
     }
 }
@@ -124,10 +127,13 @@ async function fetcher(el_to_fill) {
     //     .replace(/\:/, "%3A")
     //     + "&t=ha&va=j&ia=web"
     // let result = await fetch(new Request("http://www.duckduckgo.com/?q="+url2))
-    let result = await fetch('http://example.com/movies.json')
-
-    console.log(result)
-    el_to_fill.textContent = Object.keys(result).join(" | ")
+    try {
+        let result = await fetch('http://www.example.com/')
+        console.log(result)
+        el_to_fill.textContent = Object.keys(result).join(" | ")
+    } catch(e) {
+        console.log("couldn't fetch.")
+    }
 }
 
 function run() {
