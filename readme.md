@@ -2,8 +2,17 @@ Prototype/Proof of Concept
 
 Mozilla Extension
 
+# Installing and using
 
-# Installing
+Clone this repo
+
+Run `npm i` to install dependencies
+
+Run `npm build` to build the extension: it will be in dist
+
+Run `npm test` to run unit tests (not yet implemented)
+
+# Installing Extension on Firefox for testing
 
 In firefox
 
