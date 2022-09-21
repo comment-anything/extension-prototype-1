@@ -9,9 +9,11 @@ In firefox
 
 Open `about:debugging`
 
+Click `This Firefox`
+
 Click `Load Temporary Add-on`
 
-Select any file in your extension's directory
+Select manifest.json in your extension's directory
 
 # How to check out the code of another firefox extension
 

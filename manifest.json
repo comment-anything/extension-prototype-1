@@ -23,9 +23,11 @@
       
 
     "permissions": [
-        "webRequest",
         "cookies",
         "scripting",
-        "webNavigation"
+        "webNavigation",
+		"webRequest",
+		"webRequestBlocking", 
+		"<all_urls>"
     ]
 }

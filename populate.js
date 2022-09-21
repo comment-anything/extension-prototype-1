@@ -13,6 +13,8 @@ function body() {
 function div() {
     let div = document.createElement("div")
     div.style.userSelect = "none"
+    div.style.padding = "1px"
+    div.style.margin = "1px"
     return div
 }
 
@@ -128,11 +130,26 @@ async function fetcher(el_to_fill) {
     //     + "&t=ha&va=j&ia=web"
     // let result = await fetch(new Request("http://www.duckduckgo.com/?q="+url2))
     try {
-        let result = await fetch('http://www.example.com/')
-        console.log(result)
-        el_to_fill.textContent = Object.keys(result).join(" | ")
+        let headers = []
+        let status = 0
+        let data = ""
+        await fetch("https://raw.githubusercontent.com/klm127/club-crawler/main/package.json")
+            .then( (response) => {
+                response.headers.forEach( (header)=> {
+                    headers.push(header)
+                })
+                status = response.status
+                return response.json()
+            })
+            .then( (body)=> {
+                data = body 
+            })
+        console.log(headers, status, data)
+        el_to_fill.innerHTML = headers.join("<br>")
+        //el_to_fill.textContent = result.
     } catch(e) {
         console.log("couldn't fetch.")
+        console.log(e)
     }
 }
 
