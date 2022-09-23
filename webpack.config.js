@@ -3,11 +3,14 @@ const path = require('path');
 
 module.exports = {
     mode:"production",
-    entry: "./js/main.js",
+    entry: {
+        popup: "./js/popup.js",
+        background: "./js/background.js"
+    },
     output: {
         path: path.resolve(__dirname,"dist"),
         filename: "[name].js",
-        //clean: true
+        clean: true
     },
     plugins: [
         new CopyPlugin({
