@@ -4,7 +4,7 @@
   "main": "js/main.js",
   "description": "A proof of concept for the extension",
   "scripts": {
-    "build": "npx tsc && npx webpack .",
+    "build": "npx tsc && npx webpack",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
