@@ -4,3 +4,37 @@
     color:dodgerblue;
 
 }
+
+
+div[commentdepth="1"] {
+    margin-left: 20px;
+}
+
+div[commentdepth="2"] {
+    margin-left: 40px;
+}
+
+div[commentdepth="3"] {
+    margin-left: 60px;
+}
+
+.test-comment {
+    padding: 2em;
+    box-shadow: -0.1em 0.1em 0.1em #8b7a8c;
+    border: 5px solid #f1e8f2;
+}
+
+.test-comment-username {
+    font-size: larger;
+}
+
+.test-comment-text {
+    padding-left:0.5em;
+    padding-top:1em;
+    padding-bottom: 3em;
+}
+
+.test-comment-type {
+    display:none;
+}
+
