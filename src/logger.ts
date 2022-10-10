@@ -1,7 +1,12 @@
+import { LOGGING } from "./consts"
 
 
 export function GetLogger(name:string) {
-    return function(...s:any[]) {
-        console.log("~", name, "~",...s)
+    if (LOGGING) {
+        return function(...s:any[]) {
+            console.log("~", name, "~",...s)
+        }
+    } else {
+        return function(...s:any[]) {}
     }
 }

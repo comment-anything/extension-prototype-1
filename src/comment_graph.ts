@@ -1,3 +1,4 @@
+import { Cafe } from "./cafe"
 import { CafeComment, CafeCommentData, CafeCommentSettings } from "./comment"
 import { GetLogger } from "./logger"
 
@@ -18,8 +19,10 @@ export class CommentGraph {
     el: HTMLElement
 
     settings: CafeCommentGraphSettings
+    cafe: Cafe
 
-    constructor(settings?:CafeCommentGraphSettings) {
+    constructor(parent?: Cafe, settings?:CafeCommentGraphSettings) {
+        this.cafe = parent!
         // currently unused
         this.activeComments = new Map()
         this.el = document.createElement("div")

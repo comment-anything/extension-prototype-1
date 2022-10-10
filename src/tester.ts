@@ -18,7 +18,7 @@ class Tester {
 
     }
     testComments() {
-        let graph = new CommentGraph({
+        let graph = new CommentGraph(undefined, {
             ComDefault: {
                 cssClassComment: "test-comment",
                 cssClassText: "test-comment-text",
