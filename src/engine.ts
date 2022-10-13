@@ -9,9 +9,12 @@ export class Engine {
     }
     async run(updatetime:number) {
         if(this.running) this.stop()
+        // timeReceived is the unix time
         function updater(cafe:Cafe, timeReceived:number, delta:number) {
+            /** explanation for inner function: updater is passed as a callback function to setTimeout, a kind of old-school function; see MDN. */
             if(this.running) {
                 cafe.dispatcher
+                
 
                 let now = Date.now()
                 delta = now - timeReceived

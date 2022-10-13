@@ -21,7 +21,14 @@ export class Dispatcher {
     }
 
     processSends(time:number, delta:number) {
-        
+        if(this.sends.length == 0) {
+            return
+        }
+        let diff = time - this.cafe.fetcher.lastRequestAt
+        if(diff > this.cafe.settings.pingTime) {
+            this.cafe.fetcher.send(this.sends)
+            this.sends = []
+        }
     }
 
 }
