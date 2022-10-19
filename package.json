@@ -5,7 +5,10 @@
   "description": "A proof of concept for the extension",
   "scripts": {
     "build": "npx tsc && npx webpack",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "test-page": "start dist/test.html",
+    "tsc-watch": "npx tsc --watch",
+    "webpack-watch": "npx webpack --watch"
   },
   "repository": {
     "type": "git",

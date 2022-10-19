@@ -1,11 +1,12 @@
 import { Cafe } from "./cafe"
+import { ServerResponseTypes } from "./SERVER"
 
 
 
 
 export class Dispatcher {
     sends: Array<{}>
-    received:Array<{}>
+    received:Array<ServerResponseTypes>
     cafe: Cafe
 
     constructor(parent:Cafe) {
@@ -16,7 +17,22 @@ export class Dispatcher {
 
     processReceived() {
         for(let r of this.received) {
-            // check what it is, send it to the right thing
+            switch(r.type) {
+                case "LoginResponse":
+                    break;
+                case "LogoutResponse":
+                    break;
+                case "NewComments":
+                    
+                    break;
+                case "NewPage":
+                    // this.cafe.commentGraph.populate(r.data)
+
+                    break;
+                case "NewAlerts":
+                    break;
+                default:
+            }
         }
     }
 
