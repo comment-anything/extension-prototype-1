@@ -1,12 +1,12 @@
 import { Cafe } from "./cafe"
-import { ServerResponseTypes } from "./SERVER"
+import { TServer } from "./SERVER_TYPES"
 
 
 
 
 export class Dispatcher {
     sends: Array<{}>
-    received:Array<ServerResponseTypes>
+    received:Array<TServer.ResponseTypes>
     cafe: Cafe
 
     constructor(parent:Cafe) {
@@ -23,11 +23,11 @@ export class Dispatcher {
                 case "LogoutResponse":
                     break;
                 case "NewComments":
+                    this.cafe.commentGraph.populate(r.data, false)
                     
                     break;
                 case "NewPage":
-                    // this.cafe.commentGraph.populate(r.data)
-
+                    this.cafe.commentGraph.populate(r.data, true)
                     break;
                 case "NewAlerts":
                     break;

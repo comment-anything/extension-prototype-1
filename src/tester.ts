@@ -1,4 +1,5 @@
 import { CommentGraph } from "./comment_graph"
+import { TServer } from "./SERVER_TYPES"
 
 let tlog = function(...s:string[]) {
     console.log("TESTER SAYS: ", ...s)
@@ -29,7 +30,8 @@ class Tester {
         tlog("graph initialized succesfully") 
         graph.attachToDOM(document.body)
         tlog("graph appended to the body of the document")
-        graph.populate(TestCommentData)
+        let testdata = createFakeData()
+        graph.populate(testdata, true)
         tlog("graph populated succesfully")
     }
     testBrowser() {
@@ -52,43 +54,47 @@ document.addEventListener("DOMContentLoaded", ()=>{
     T.testComments()
 })
 
-const TestCommentData = [
-    {
-        "id": 0,
-        "username": "ramone",
-        "text": "hey guys first comment on the site! woohoo",
-        "commentType": "none"
-    },
-    
-    {
-        "id": 1,
-        "parent": 0,
-        "username": "ramone",
-        "text": "first comment on my own comment!",
-        "commentType": "none"
-    },
-    
-    {
-        "id": 2,
-        "parent": 1,
-        "username": "ramone",
-        "text": "second comment on my own comment!",
-        "commentType": "angry"
-    },
-    
-    {
-        "id": 3,
-        "parent": 2,
-        "username": "ramone",
-        "text": "fourth comment on my own comment!",
-        "commentType": "none"
-    },
-    
-    {
-        "id": 77,
-        "parent": 1,
-        "username": "thelma",
-        "text": "Ramone, why do you keep commenting on your own comments?",
-        "commentType": "question"
+
+
+
+
+
+function createFakeData() : Array<TServer.CommentData>{
+    let ids =     [2,4, 10, 5, 7, 8,9]
+    let parents = [0,0, 2,  7, 4, 4, 0]
+    let usernames = ["frank", "luke", "bob", "interloper"]
+    let text = ["HI!", "HELLO", "Lorem ipsum dolerum solerum and other nonsense", "I like make comments"]
+
+    let results : TServer.CommentData[]= []
+
+    for(let i = 0; i < ids.length; i++) {
+        let id = ids[i]
+        let d : Partial<TServer.CommentData> = {} 
+        d.id = id
+        d.parent = parents[i]
+        d.username = usernames[Math.floor(Math.random()*4)]
+        d.text = text[Math.floor(Math.random() * 4)]
+        d.date = Math.random() * 10000
+        d.reactions = {
+            funny: {
+                ups: Math.floor(Math.random() * 20),
+                downs: Math.floor(Math.random() * 20),
+            },
+            troll: {
+                ups: Math.floor(Math.random() * 20),
+                downs: Math.floor(Math.random() * 20),
+            },
+            factual: {
+                ups: Math.floor(Math.random() * 20),
+                downs: Math.floor(Math.random() * 20),
+            },
+            informative: {
+                ups: Math.floor(Math.random() * 20),
+                downs: Math.floor(Math.random() * 20),
+            },
+        }
+        results.push(d as TServer.CommentData)
     }
-]
+    return results
+}
+

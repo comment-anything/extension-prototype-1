@@ -1,14 +1,13 @@
 import { Cafe } from "./cafe"
 import { CafeComment, CafeCommentData, CafeCommentSettings } from "./comment"
 import { GetLogger } from "./logger"
+import { TServer } from "./SERVER_TYPES"
 
 
-interface CafeCommentGraphData extends CafeCommentData {
-    id:number
-    parent?:number
-}
+
 
 type CafeCommentGraphSettings = {
+    // sets the classes for each comment this graph generates
     ComDefault:CafeCommentSettings
 }
 
@@ -23,7 +22,6 @@ export class CommentGraph {
 
     constructor(parent?: Cafe, settings?:CafeCommentGraphSettings) {
         this.cafe = parent!
-        // currently unused
         this.activeComments = new Map()
         this.el = document.createElement("div")
         if(settings) {
@@ -70,6 +68,10 @@ export class CommentGraph {
             // this.username.classList.add(settings.cssClassUsername)
             // this.text.classList.add(settings.cssClassText)
             // this.commentType.classList.add(settings.cssClassCommentType)
+        } else {
+            this.settings = {
+                ComDefault: {}
+            }
         }
     }
 
@@ -77,129 +79,68 @@ export class CommentGraph {
     
     /*
 
-    Populates the Comment with data
+    Populates the Graph with data
 
     Otherwise removes the data
 
     */ 
-    populate(data? : Array<CafeCommentGraphData>) {
-        // make a graph here
-        let tlog = GetLogger("CafeGraph.Populate")
-        tlog("Received data of this length: ", data.length.toString())
-        if(data != undefined) {
-            let graphResult = GetCommentGraph(data)
-            tlog("got graph result... size of ", graphResult.roots.length.toString(), "with these errors:", ...graphResult.errors)
-
-            for(let root of graphResult.roots.sort( (a,b)=> a.data.id < b.data.id ? 1 : -1)) {
-                let rootComment = this.recursivelyBuildComments(root)
-                rootComment.attachToDOM(this.el)
+    populate(data : Array<TServer.CommentData>, clearold: boolean) {
+        let log = GetLogger("Comment Graph")
+        if(clearold) {
+            let extant = Array.from(this.activeComments.values())
+            for(let com of extant) {
+                com.destroy()
             }
-        } else {
-            tlog("got empty populate request")
-            this.populate(undefined)
+            this.activeComments = new Map()
         }
-    }
-    recursivelyBuildComments(graphdata: CafeCommentGraphNode, depth=0) : CafeComment {
-        graphdata.data.depth = depth
-        let root = new CafeComment(this.settings.ComDefault, graphdata.data)
-        for(let child of graphdata.children) {
-            let comment = this.recursivelyBuildComments(child, depth+1)
-            comment.attachToDOM(root.childrenContainer)
-        }
-        return root
-    }
-}
-
-// /*
-//     Builds comments from a graph and sets their depth accordingly
-// */
-// function recursivelyBuildComments(graphdata: CafeCommentGraphNode, depth=0) : CafeComment {
-//     graphdata.data.depth = depth
-//     let root = new CafeComment(undefined, graphdata.data)
-//     for(let child of graphdata.children) {
-//         let comment = recursivelyBuildComments(child, depth+1)
-//         comment.attachToDOM(root.childrenContainer)
-//     }
-//     return root
-// }
-
-
-
-
-interface CafeCommentGraphNode {
-    data: CafeCommentGraphData
-    parent?: CafeCommentGraphNode
-    children?: Array<CafeCommentGraphNode>
-}
-
-function GetCommentGraph(data: Array<CafeCommentGraphData>) {
-
-    let tlog = GetLogger("GetCommentGraph")
-
-    let rootComments : Array<CafeCommentGraphNode> = []
-    let noded : Map<number, CafeCommentGraphNode> = new Map()
-    let noParentYet : Array<CafeCommentGraphNode> = []
-    
-    let dlog = GetLogger("GetCommentGraph *initial for loop ---- ")
-    for(let ccdata of data) {
-        dlog("Parsing node with id:", ccdata.id, "wants parent: ", ccdata.parent)
-        let node = {
-            children: [],
-            data: ccdata
-        } as CafeCommentGraphNode
-        if(ccdata.parent == undefined) {
-            dlog("---", ccdata.id, " is a root node!")
-            rootComments.push(node)
-            noded.set(ccdata.id, node)
-            continue 
-        }
-        if(noded.has(ccdata.parent)) {
-            dlog("---", ccdata.id, " has a parent already set up!")
-            noded.get(ccdata.parent).children.push(node)
-            noded.set(ccdata.id, node)
-            continue
-        }
-        else {
-            dlog("---", ccdata.id, " doesnt have a parent yet.")
-            noParentYet.push(node)
-        }
-    }
-
-    tlog("After the initial parse, data length was:", data.length, "number root:", rootComments.length, "number noded:", Array.from(noded.keys()).length, "number no parent", noParentYet.length)
-
-    dlog = GetLogger("GetCommentGraph *SECOND Sort-While loop ---- ")
-
-    let sorts = 10 
-    while(sorts > 0 && noParentYet.length > 0) {
-        dlog("starting a FOR loop on array noParentYet with length: ", noParentYet.length)
-        for(let node of noParentYet) {
-            dlog("checking node with id: ", node.data.id, " and parent ", node.data.parent)
-            let parent = noded.get(node.data.parent)
-            dlog("That parent exists in noded? ", parent !== undefined)
-            if(parent != undefined) { 
-                parent.children.push(node)
-    
-                noParentYet = noParentYet.splice(noParentYet.indexOf(node), 1)
-                continue
+        let notfound = []
+        let rootComments = []
+        let noParents : TServer.CommentData[]= []
+        for(let datum of data) {
+            if(datum.parent == 0 || datum.parent == undefined) {
+                let comment = new CafeComment(this.settings.ComDefault, datum)
+                comment.attachToDOM(this.el)
+                this.activeComments.set(datum.id, comment)
+            }
+            else {
+                let possible_parent = this.activeComments.get(datum.parent)
+                if(possible_parent != undefined) {
+                    let comment = new CafeComment(this.settings.ComDefault, datum)
+                    comment.attachToDOM(possible_parent.childrenContainer)
+                    this.activeComments.set(datum.id, comment)
+                }
+                else {
+                    noParents.push(datum)
+                }
             }
         }
-        sorts--
+        log("After initial runthrough, there were", noParents.length, "comments without parents.")
+
+        log("The current map is:", this.activeComments)
+        
+        let number_of_loops = 5
+        for(let i = number_of_loops; i >=0; i--) {
+            let stillNoParents = []
+            for(let datum of noParents) {
+                let possible_parent = this.activeComments.get(datum.parent)
+                if(possible_parent != undefined) {
+                    let comment = new CafeComment(this.settings.ComDefault, datum)
+                    comment.attachToDOM(possible_parent.childrenContainer)
+                    this.activeComments.set(datum.id, comment)
+                } else {
+                    stillNoParents.push(datum)
+                }
+            }
+            noParents = stillNoParents
+        }
+        log("After subsequent loops, there were ", noParents.length, "comments without parents.") 
+        if(noParents.length > 0) {
+            log("The remaining are:")
+            for(let np of noParents) {
+                log(np)
+            }
+        }
+
     }
-
-    let errors = []
-    if(noParentYet.length > 0) {
-        errors.push("Was unable to display all comments!")
-    }
-
-    return {
-        roots: rootComments,
-        errors: errors
-    }
-}
-
-type GetCommentGraphReturnType = {
-    roots: Array<CafeCommentGraphNode>
-    errors: string[]
-
 }
 

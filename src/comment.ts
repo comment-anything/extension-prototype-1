@@ -1,4 +1,8 @@
 import { COM_DEPTH_ATTR } from "./consts"
+import {TServer} from "./SERVER_TYPES"
+
+
+
 
 export type CafeCommentData = {
     username: string
@@ -20,25 +24,23 @@ export class CafeComment {
     el: HTMLDivElement;
     username: HTMLDivElement;
     text: HTMLDivElement;
+    // commentType is determined by which type of reaction has the most "ups"
     commentType: HTMLDivElement;
 
     // this may get set/managed from another object... will develop it later
     emitter:undefined
     childrenContainer: HTMLDivElement
+    reactions: HTMLDivElement
 
-    constructor(settings?:CafeCommentSettings, data?:CafeCommentData) {
+    constructor(settings?:CafeCommentSettings, data?:TServer.CommentData) {
         this.el = document.createElement("div")
         this.username = document.createElement("div")
         this.text = document.createElement("div")
         this.commentType = document.createElement("div")
+        this.reactions = document.createElement("div")
         this.childrenContainer = document.createElement("div")
         this.el.append(this.username,this.text,this.commentType, this.childrenContainer)
 
-        // see consts.ts for where the attribute is defined. For CSS selectors
-        let depth_attribute = document.createAttribute(COM_DEPTH_ATTR)
-        depth_attribute.value = data.depth ? data.depth.toString() : "0"
-
-        this.el.attributes.setNamedItem(depth_attribute)
         this.applySettings(settings)
         this.populate(data)
     }
@@ -80,6 +82,13 @@ export class CafeComment {
         }
     }
 
+    /**
+     * Removes this comment, removing HTML elements and listeners
+     */
+    destroy() {
+        //todo
+    }
+
     /*
 
     Populates the Comment with data
@@ -87,17 +96,15 @@ export class CafeComment {
     Otherwise removes the data
 
     */ 
-    populate(data?:CafeCommentData) {
+    populate(data?:TServer.CommentData) {
         if(data != undefined) {
             this.username.textContent = data.username ? data.username : undefined
             this.text.textContent = data.text ? data.text : undefined
-            this.commentType.textContent = data.commentType ? data.commentType : undefined
+            this.commentType.textContent = ""
         } else {
-            this.populate({
-                username: "",
-                text:"",
-                commentType:""
-            })
+            this.username.textContent = ""
+            this.text.textContent = ""
+            this.commentType.textContent = ""
         }
     }
 }
