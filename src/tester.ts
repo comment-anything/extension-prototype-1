@@ -1,5 +1,8 @@
 import { CommentGraph } from "./comment_graph"
+import { InterfaceDisplay } from "./interfaceDisplay"
+import { NavBar } from "./navbar"
 import { TServer } from "./SERVER_TYPES"
+import { STATE } from "./STATES"
 
 let tlog = function(...s:string[]) {
     console.log("TESTER SAYS: ", ...s)
@@ -46,12 +49,21 @@ class Tester {
     testCache() {
 
     }
+    testNavBar() {
+        let interfaceDisplay = new InterfaceDisplay(undefined)
+        let navbar = new NavBar(interfaceDisplay)
+        document.body.append(interfaceDisplay.el)
+        console.log(navbar)
+        interfaceDisplay.setStateTo(STATE.REPORTS_ADMIN)
+
+    }
 }
 
 document.addEventListener("DOMContentLoaded", ()=>{
     const T = new Tester()
     console.log(T)
-    T.testComments()
+    //T.testComments()
+    T.testNavBar()
 })
 
 

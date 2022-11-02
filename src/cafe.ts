@@ -2,6 +2,7 @@ import { CommentGraph } from "./comment_graph";
 import { Dispatcher } from "./dispatcher";
 import { Engine } from "./engine";
 import { Fetcher } from "./fetcher";
+import { InterfaceDisplay } from "./interfaceDisplay";
 
 
 type CafeSettings = {
@@ -18,15 +19,16 @@ export class Cafe {
 
     // composition pattern
     fetcher: Fetcher
-    commentGraph: CommentGraph
+    //commentGraph: CommentGraph
     dispatcher: Dispatcher
     engine: Engine
     settings: CafeSettings
+    interfaceDisplay: InterfaceDisplay;
 
     constructor(settings:CafeSettings) {
         this.settings = settings
         this.fetcher = new Fetcher(this)
-        this.commentGraph = new CommentGraph(this)
+        this.interfaceDisplay = new InterfaceDisplay(this)
         this.dispatcher = new Dispatcher(this)
         this.engine = new Engine(this)
     }

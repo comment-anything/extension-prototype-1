@@ -23,11 +23,11 @@ export class Dispatcher {
                 case "LogoutResponse":
                     break;
                 case "NewComments":
-                    this.cafe.commentGraph.populate(r.data, false)
+                    //this.cafe.commentGraph.populate(r.data, false)
                     
                     break;
                 case "NewPage":
-                    this.cafe.commentGraph.populate(r.data, true)
+                    //this.cafe.commentGraph.populate(r.data, true)
                     break;
                 case "NewAlerts":
                     break;
