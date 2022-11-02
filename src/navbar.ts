@@ -17,13 +17,13 @@ export class NavBar {
     constructor(parent: InterfaceDisplay) {
         this.ui = parent
         this.el = document.createElement("nav")
-        this.login = buttonNamed("Log in")
-        this.register = buttonNamed("Register")
-        this.logout = buttonNamed("Log Out")
-        this.comments = buttonNamed("Comments")
-        this.settings = buttonNamed("Settings")
-        this.moderation = buttonNamed("Moderation")
-        this.reports = buttonNamed("Reports")
+        this.login = buttonNamed("Log in", this)
+        this.register = buttonNamed("Register", this)
+        this.logout = buttonNamed("Log Out", this)
+        this.comments = buttonNamed("Comments", this)
+        this.settings = buttonNamed("Settings", this)
+        this.moderation = buttonNamed("Moderation", this)
+        this.reports = buttonNamed("Reports", this)
         this.allButtons = []
         this.allButtons.push(this.login, this.register, this.logout, this.comments, this.settings, this.moderation, this.reports)
         this.el.append(...this.allButtons)
@@ -112,13 +112,19 @@ export class NavBar {
                 break;
         }
     }
+    clickReceived(s:string) {
+        this.ui.navbarClick(s)
+    }
 }
 
 
 
 
-function buttonNamed(s:string) :HTMLButtonElement {
+function buttonNamed(s:string, nav:NavBar) :HTMLButtonElement {
     let el = document.createElement("button")
+    el.addEventListener("click", ()=> {
+        nav.clickReceived(s)
+    })
     el.style.visibility = "hidden"
     el.textContent = s
     return el

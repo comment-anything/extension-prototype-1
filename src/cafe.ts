@@ -3,6 +3,7 @@ import { Dispatcher } from "./dispatcher";
 import { Engine } from "./engine";
 import { Fetcher } from "./fetcher";
 import { InterfaceDisplay } from "./interfaceDisplay";
+import { STATE } from "./STATES";
 
 
 type CafeSettings = {
@@ -23,12 +24,15 @@ export class Cafe {
     dispatcher: Dispatcher
     engine: Engine
     settings: CafeSettings
-    interfaceDisplay: InterfaceDisplay;
+    interfaceDisplay: InterfaceDisplay
+    state: STATE
 
     constructor(settings:CafeSettings) {
         this.settings = settings
         this.fetcher = new Fetcher(this)
+        this.state = STATE.COMMENTS_LOGGED_OUT
         this.interfaceDisplay = new InterfaceDisplay(this)
+        this.interfaceDisplay.setStateTo(this.state)
         this.dispatcher = new Dispatcher(this)
         this.engine = new Engine(this)
     }
