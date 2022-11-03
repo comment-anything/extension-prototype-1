@@ -6,7 +6,7 @@ module.exports = {
     entry: {
         popup: "./js/popup.js",
         background: "./js/background.js",
-        tester: "./js/tester.js"
+        tester: "./js/tests/testEntry.js"
     },
     output: {
         path: path.resolve(__dirname,"dist"),
