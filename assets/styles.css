@@ -60,3 +60,8 @@ button {
     font-size: 14px;
     color: red
 }
+
+.cafeModReport {
+    background-color: cornsilk;
+    padding: 20px;
+}

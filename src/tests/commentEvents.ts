@@ -1,45 +1,16 @@
 import { CafeComment } from "../CafeComment";
 import { CafeEventHandle } from "../Events";
+import { Server } from "../SERVER_DATA";
 import { dom } from "../utility/dom";
 import { TestDomLogs } from "./domlogs";
+import { DRTestWindow } from "./DRTestWindow";
 
-export class CommentEventUITests {
-    logs: TestDomLogs
-    el: HTMLDivElement;
-    nav: HTMLDivElement
-    toDestroy: {destroy():void}[]
-    comContainer: HTMLDivElement;
+export class CommentEventUITests extends DRTestWindow<Server.Comment>{
     constructor() {
-        this.el = dom.div()
-        this.nav = dom.div()
-        let rlContainer = dom.div(undefined, undefined, {"display":"flex"})
-        this.logs = new TestDomLogs()
-        this.el.append(this.nav, rlContainer)
-        this.comContainer = dom.div()
-        rlContainer.append(this.comContainer, this.logs.el)
-
-        this.toDestroy = []
-        let basicCommentTestButton = dom.button("comment")
-        this.nav.append(basicCommentTestButton)
-
-        let testSingleCommentCb = this.testAComment.bind(this)
-        basicCommentTestButton.addEventListener("click", testSingleCommentCb)
-
-        function deleteComs() {
-            for(let x of this.toDestroy) {
-                x.destroy()
-            }
-            this.toDestroy = []
-        }
-
-        let delCommentsButton = dom.button("delete all comments")
-        this.nav.append(delCommentsButton)
-        delCommentsButton.addEventListener("click", deleteComs.bind(this))
-    }
-
-    testAComment() {
-        let com = new CafeComment({
+        super()
+        this.bindStamper({
             id: 1,
+            time: Date.now(),
             parent: 0,
             username: "Sven",
             content: "I've written a comment.",
@@ -65,12 +36,11 @@ export class CommentEventUITests {
                 downs: 3,
                 alreadyVoted: 1
             }
-        })
-        this.comContainer.append(com.el)
-        this.toDestroy.push(com)
+        }, CafeComment)
         document.addEventListener(CafeEventHandle, (e:any)=> {
             this.logs.log("Received an event of type " + CafeEventHandle)
             this.logs.log(" It has data: "+ JSON.stringify(e.detail))
         })
+        
     }
 }
