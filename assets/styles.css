@@ -1,45 +1,62 @@
-
-.url-display {
-    background-color: cornsilk;
-    color:dodgerblue;
-
-}
-
-
-div[commentdepth="1"] {
-    margin-left: 20px;
-}
-
-div[commentdepth="2"] {
-    margin-left: 40px;
-}
-
-div[commentdepth="3"] {
-    margin-left: 60px;
-}
-
-.test-comment {
-    padding: 2em;
-    box-shadow: -0.1em 0.1em 0.1em #8b7a8c;
-    border: 5px solid #f1e8f2;
-}
-
-.test-comment-username {
-    font-size: larger;
-}
-
-.test-comment-text {
-    padding-left:0.5em;
-    padding-top:1em;
-    padding-bottom: 3em;
-}
-
-.test-comment-type {
-    display:none;
+button {
+    border-radius: 0px;
+    border: 1px solid gray;
+    margin: 1px;
 }
 
 
 .cafeComment {
     padding: 10px;
+    background-color: rgb(245, 235, 235);
 }
 
+
+.cafeComment > div:nth-child(1) {
+    font-size: 16px;
+    width: 50%;
+    padding: 4px;
+    margin-bottom: 5px;
+}
+
+.cafeComment > div:nth-child(2) {
+    margin-bottom: 5px;
+    padding-left: 5px;
+    border-top: 1px solid white;
+}
+
+
+.cafeCommentVoter {
+    text-align: center;
+}
+
+.cafeCommentVoter label {
+    font-size: 12px;
+    width: 32px;
+    padding-left: 2px;
+    padding-right: 2px;
+}
+
+.cafeCommentVoter button {
+    width: 20px;
+    margin: 0px auto;
+}
+
+.cafeCommentVoter span {
+    width: 20px;
+    font-size: 10px;
+    text-align: center;
+    margin: 0px auto;
+}
+
+.cafeCommentVoter button:nth-of-type(1) {
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    font-size: 14px;
+    color: blue
+}
+.cafeCommentVoter button:nth-of-type(2) {
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    font-size: 14px;
+    color: red
+}

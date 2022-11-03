@@ -4,6 +4,9 @@ import { UIInput } from "./UIInput"
 import { CafeEvent, CafeEventHandle, CommentVoteTypes } from "./Events"
 
 
+const CafeCommentCSS = "cafeComment"
+const VoterCSS = "cafeCommentVoter"
+
 export class CafeComment extends UIInput{
     commentId: number
     username: HTMLDivElement
@@ -18,6 +21,7 @@ export class CafeComment extends UIInput{
     agree: CafeCommentVoter
     constructor(data: Server.Comment) {
         super()
+        this.el.classList.add(CafeCommentCSS)
         this.commentId = data.id
         this.username = dom.div(data.username)
         this.text = dom.div(data.content)
@@ -76,21 +80,21 @@ class CafeCommentVoter extends UIInput{
     commentId: number
     name: CommentVoteTypes
     data: Server.CommentVotes
-    nameLabel: HTMLSpanElement
+    nameLabel: HTMLLabelElement
     up: HTMLButtonElement
     total: HTMLSpanElement
     down: HTMLButtonElement
     constructor(name:CommentVoteTypes, votes:Server.CommentVotes) {
         super()
+        this.el.classList.add(VoterCSS)
         this.el.style.display = "inline-block"
-        this.el.style.width = "50px"
         let innerel = dom.div("","",{"display":"grid"})
         this.name = name 
         this.data = votes
-        this.nameLabel = dom.span(name, "", {"gridRow":"1"})
-        this.up = dom.button("up", "", {"gridRow":"2"})
+        this.nameLabel = dom.textEl("label", name, "", {"gridRow":"1"})
+        this.up = dom.button("+", "", {"gridRow":"2"})
         this.total = dom.span( (votes.ups - votes.downs).toString(), "", {"gridRow":"3"})
-        this.down = dom.button("down", "", {"gridRow":"4"})
+        this.down = dom.button("-", "", {"gridRow":"4"})
         innerel.append(this.nameLabel, this.up, this.total, this.down)
         this.el.append(innerel)
 

@@ -43,6 +43,7 @@ function span(text?: string, cssClass?:string | string[], styles?:{[key:string]:
 
 export const dom = {
     el: el,
+    textEl: textEl,
     div: div,
     button: button,
     span: span
