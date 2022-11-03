@@ -55,7 +55,6 @@ class Tester {
         document.body.append(interfaceDisplay.el)
         console.log(navbar)
         interfaceDisplay.setStateTo(STATE.REPORTS_ADMIN)
-
     }
 }
 
