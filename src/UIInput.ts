@@ -1,13 +1,17 @@
+import { dom } from "./utility/dom"
 
 export class UIInput{
     el: HTMLElement
+    blocker: HTMLElement
     listeners: Array<[HTMLElement, (e:any)=>any, string]>
     dispatchCafeEvent: ()=> void
     constructor() {
-        this.el = document.createElement("div")
+        this.el = dom.div(undefined, undefined, {"position":"relative", "zIndex": "0"})
+        this.blocker = dom.div(undefined, undefined, {"position":"absolute", "top":"0px", "left":"0px", "width":"100%", "height":"100%", "zIndex":"-1"})
+        this.el.append(this.blocker)
         this.listeners = []
     }
-    clickListen(el:HTMLElement | HTMLElement[], fun: ((e:MouseEvent)=>any) | Array<(e:MouseEvent)=>any>, bind?: boolean) {
+    clickListen(el:HTMLElement | HTMLElement[], fun: ((e:MouseEvent)=>any) | Array<(e:MouseEvent)=>any>, bind=true) {
         if(bind) {
             if(Array.isArray(fun)) {
                 let boundArr : Array<(e:MouseEvent)=>any> = []
@@ -18,7 +22,6 @@ export class UIInput{
             } else {
                 fun = fun.bind(this)
             }
-
         }
         if(Array.isArray(el)) {
             if(Array.isArray(fun)) {
@@ -45,6 +48,10 @@ export class UIInput{
                 this.listeners.push([el, fun, "click"])
             }
         }
+    }
+    disable() {
+        this.blocker.style.backgroundColor = "rgba(200,200,200,0.5)"
+        this.blocker.style.zIndex = "1"
     }
     destroy() {
         for(let triplet of this.listeners) {

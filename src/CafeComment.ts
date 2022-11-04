@@ -62,8 +62,9 @@ export class CafeComment extends UIInput{
                 detail: evData
             })
             document.dispatchEvent(ev)
+            this.disable()
         }
-        this.clickListen(this.submitButton, submitReply.bind(this))
+        this.clickListen(this.submitButton, submitReply)
     }
 
     destroy(): void {

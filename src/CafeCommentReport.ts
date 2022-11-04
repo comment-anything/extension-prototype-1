@@ -52,7 +52,7 @@ export class CafeCommentReport extends UIInput {
             this.submitButton.style.display = "inline"
             this.reasonTextArea.style.display = "block"
         }
-        this.clickListen([hideButton, removeButton, noActionButton], displayOnClick, true)
+        this.clickListen([hideButton, removeButton, noActionButton], displayOnClick)
 
         function selectModAction(buttontext:string, cafeEventType:CommentReportActions) {
             function setSubmitBtn(e:MouseEvent) {
@@ -62,9 +62,9 @@ export class CafeCommentReport extends UIInput {
             setSubmitBtn.bind(this)
             return setSubmitBtn
         }
-        this.clickListen(hideButton, selectModAction("Execute Hide", "hide"), true)
-        this.clickListen(removeButton, selectModAction("Execute Remove", "remove"), true)
-        this.clickListen(noActionButton, selectModAction("Execute No Action", "noaction"), true)
+        this.clickListen(hideButton, selectModAction("Execute Hide", "hide"))
+        this.clickListen(removeButton, selectModAction("Execute Remove", "remove"))
+        this.clickListen(noActionButton, selectModAction("Execute No Action", "noaction"))
 
         function submitAction() {
             let evData : CafeEvent = {
@@ -75,11 +75,12 @@ export class CafeCommentReport extends UIInput {
             }
             let ev = new CustomEvent<CafeEvent>(CafeEventHandle, {detail: evData})
             document.dispatchEvent(ev)
+            this.disable()
         }
 
-        this.clickListen(this.submitButton, submitAction, true)
+        this.clickListen(this.submitButton, submitAction)
 
-        this.clickListen(skipButton, this.destroy, true)
+        this.clickListen(skipButton, this.destroy)
         
 
     }
