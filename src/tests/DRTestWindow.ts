@@ -29,6 +29,7 @@ export class DRTestWindow<DType> {
     container: HTMLDivElement
     toDestroy: {destroy(): void}[]
     nav: HTMLElement
+    clearButton: HTMLButtonElement;
 
     constructor() {
         this.toDestroy = []
@@ -40,6 +41,17 @@ export class DRTestWindow<DType> {
         rlcontainer.append(this.container, this.logs.el)
         this.el.append(this.nav, rlcontainer)
 
+        this.clearButton = dom.button("clear")
+        this.clearButton.addEventListener("click", this.clear.bind(this))
+        this.nav.append(this.clearButton)
+
+    }
+
+    clear() {
+        for(let inst of this.toDestroy) {
+            inst.destroy()
+        }
+        this.toDestroy = []
     }
 
     boundButton(n:string, cb:()=>void) {
@@ -56,6 +68,14 @@ export class DRTestWindow<DType> {
             this.toDestroy.push(boundry)
         })
         this.nav.append(but)
+    }
+
+    logEvents(evname:string) {
+        let f = (e:any) => {
+            this.logs.log("Event of type: " + evname)
+            this.logs.log("---- Data: " + JSON.stringify(e.detail))
+        }
+        document.addEventListener(evname, f.bind(this))
     }
 
 

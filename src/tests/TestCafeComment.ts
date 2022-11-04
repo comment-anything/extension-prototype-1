@@ -5,7 +5,7 @@ import { dom } from "../utility/dom";
 import { TestDomLogs } from "./domlogs";
 import { DRTestWindow } from "./DRTestWindow";
 
-export class CommentEventUITests extends DRTestWindow<Server.Comment>{
+export class TestCafeComment extends DRTestWindow<Server.Comment>{
     constructor() {
         super()
         this.bindStamper({

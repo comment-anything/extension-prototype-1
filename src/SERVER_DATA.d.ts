@@ -27,13 +27,6 @@ export namespace Server {
         ReportingUsername: string
         TimeReported: number
         Reason: string
-        CommentPosterId: number
-        CommentPosterUsername: string
-        CommentContent: string
-        CommentTime: number
-        Funny: number
-        Troll: number
-        Factual: number
-        Agree: number
+        CommentData: Server.Comment
     }
 }

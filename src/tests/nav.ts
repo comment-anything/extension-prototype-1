@@ -31,6 +31,7 @@ export class TestNav {
             but.disabled = true
             elToShowHide.style.display = originalDisplay
         }
+        this.links.set(but, elToShowHide)
         but.addEventListener("click", listnr.bind(this))
         this.el.append(but)
     }

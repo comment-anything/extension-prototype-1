@@ -3,7 +3,7 @@ import { UIInput } from "./UIInput";
 
 
 
-export class CafeModReport extends UIInput {
+export class CafeCommentReport extends UIInput {
     data: Server.CommentReport
     
     static setCSS(el:HTMLElement) {
@@ -15,5 +15,6 @@ export class CafeModReport extends UIInput {
     constructor(data: Server.CommentReport) {
         super()
         this.data = data
+        CafeCommentReport.setCSS(this.el)
     }
 }
