@@ -70,6 +70,16 @@ export class DRTestWindow<DType> {
         this.nav.append(but)
     }
 
+    bindRandomizer(randomizerFunction:()=>DType, domInstance: class_that_takes<DType>) {
+        let but = this.boundButton("random", ()=>{
+            let newdat = randomizerFunction()
+            let boundry = new domInstance(newdat)
+            this.container.append(boundry.el)
+            this.toDestroy.push(boundry)
+        })
+        this.nav.append(but)
+    }
+
     logEvents(evname:string) {
         let f = (e:any) => {
             this.logs.log("Event of type: " + evname)
