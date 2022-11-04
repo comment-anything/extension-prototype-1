@@ -4,6 +4,7 @@ import { DRTestWindow } from "./DRTestWindow";
 
 import { Server } from "../SERVER_DATA";
 import { CafeCommentReport } from "../CafeCommentReport";
+import { CafeEventHandle } from "../Events";
 
 export class TestCafeCommentReport extends DRTestWindow<Server.CommentReport>{
     constructor() {
@@ -28,6 +29,10 @@ export class TestCafeCommentReport extends DRTestWindow<Server.CommentReport>{
                 agree: { ups:0, downs:0, alreadyVoted: 0 }
             }
         }, CafeCommentReport)
+        document.addEventListener(CafeEventHandle, (e:any)=> {
+            this.logs.log("Received an event of type " + CafeEventHandle)
+            this.logs.log(" It has data: "+ JSON.stringify(e.detail))
+        })
     }
     
 }
