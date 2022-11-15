@@ -8,9 +8,15 @@ Clone this repo
 
 Run `npm i` to install dependencies
 
-Run `npm build` to build the extension: it will be in dist
+Run `npm run build` to build the extension: it will be in `./dist`
 
-Run `npm test` to run unit tests (not yet implemented)
+Run `npm run test` to run unit tests (not yet implemented)
+
+# Run the debug/test page.
+
+Run `npm run test-page` to open the test page in your default browser.
+
+If that isn't configured, open the .html file located in `dist/test.html` manually.
 
 # Installing Extension on Firefox for testing
 
@@ -22,20 +28,6 @@ Click `This Firefox`
 
 Click `Load Temporary Add-on`
 
-Select manifest.json in your extension's directory
-
-# How to check out the code of another firefox extension
-
-Profile Folder - > type `about:support` in the browser
-At Open Folder click `Open Folder`
-click `extensions`
-
-You will see a bunch of .xpi extensions
+Select manifest.json in your extensions directory.
 
 
-Already included  is [Forecast Fox](https://addons.mozilla.org/en-US/firefox/addon/forecastfox-fix-version/?utm_source=addons.mozilla.org&utm_medium=referral&utm_content=search) to research how it conducts api calls
-# Need to use permissions to comply with CORS
-
-[see this](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS)
-
-There's a way to do this which is why I am examining other extensions.

@@ -7,6 +7,7 @@ import { CafeEvent, CafeEventHandle, CommentVoteTypes } from "./Events"
 const CafeCommentCSS = "cafeComment"
 const VoterCSS = "cafeCommentVoter"
 
+
 export class CafeComment extends UIInput{
     commentId: number
     username: HTMLDivElement
@@ -26,7 +27,7 @@ export class CafeComment extends UIInput{
         this.username = dom.div(data.username)
         this.text = dom.div(data.content)
         this.replyButton = dom.button("reply")
-        let replyContainer = dom.div("", "", {"display":"none"})
+        let replyContainer = dom.div(undefined, "", {"display":"none"})
         this.replyBox = dom.el("textarea")
         this.submitButton = dom.button("submit")
         replyContainer.append(this.replyBox, this.submitButton)

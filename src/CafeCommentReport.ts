@@ -4,8 +4,7 @@ import { Server } from "./SERVER_DATA";
 import { UIInput } from "./UIInput";
 import { dom } from "./utility/dom";
 
-
-
+const cssClass = "cafeModReport"
 export class CafeCommentReport extends UIInput {
     data: Server.CommentReport
     cafeComment: CafeComment;
@@ -19,7 +18,7 @@ export class CafeCommentReport extends UIInput {
     static setCSS(el:HTMLElement) {
         el.style.display = "flex"
         el.style.flexDirection = "row"
-        el.classList.add("cafeModReport")
+        el.classList.add(cssClass)
     }
     
     constructor(data: Server.CommentReport) {
@@ -27,7 +26,7 @@ export class CafeCommentReport extends UIInput {
         CafeCommentReport.setCSS(this.el)
         this.data = data
         this.cafeComment = new CafeComment(data.CommentData)
-        let reportContainer = dom.div()
+        let reportContainer = dom.div(undefined, )
         this.el.append(this.cafeComment.el, reportContainer)
         let reportingUser = dom.div(data.ReportingUsername)
         let reportContent = dom.div(data.Reason)

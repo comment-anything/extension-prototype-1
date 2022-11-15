@@ -4,6 +4,7 @@ export namespace Server {
     type Comment = {
         id: number,
         parent: number
+        userid: number
         username: string
         time: number
         content: string 
