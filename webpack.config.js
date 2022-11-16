@@ -2,6 +2,7 @@ const CopyPlugin = require('copy-webpack-plugin');
 const path = require('path');
 
 module.exports = {
+    devtool: 'source-map',
     mode:"production",
     entry: {
         popup: "./js/popup.js",

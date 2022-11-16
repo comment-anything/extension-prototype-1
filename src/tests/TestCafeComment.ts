@@ -1,7 +1,7 @@
 import { Cafe } from "../cafe";
 import { CafeComment } from "../CafeComment";
 import { CafeEventHandle } from "../Events";
-import { Server } from "../SERVER_DATA";
+import { Server } from "../SERVER";
 import { dom } from "../utility/dom";
 import { TestDomLogs } from "./domlogs";
 import { DRTestWindow } from "./DRTestWindow";
@@ -11,18 +11,14 @@ export class TestCafeComment extends DRTestWindow<Server.Comment>{
     constructor() {
         super()
         this.bindStamper({
-            id: 1,
-            time: Date.now(),
+            userId: 10,
+            commentId: 1,
+            timePosted: Date.now(),
             parent: 0,
             username: "Sven",
             content: "I've written a comment.",
             hidden: false,
             removed: false,
-            troll: {
-                ups: 1,
-                downs: 0,
-                alreadyVoted: 0
-            },
             funny: {
                 ups: 0,
                 downs: 0,
@@ -38,7 +34,7 @@ export class TestCafeComment extends DRTestWindow<Server.Comment>{
                 downs: 3,
                 alreadyVoted: 1
             }
-        }, CafeComment)
+        } as Server.Comment, CafeComment)
         document.addEventListener(CafeEventHandle, (e:any)=> {
             this.logs.log("Received an event of type " + CafeEventHandle)
             this.logs.log(" It has data: "+ JSON.stringify(e.detail))
@@ -46,18 +42,14 @@ export class TestCafeComment extends DRTestWindow<Server.Comment>{
 
         this.bindRandomizer(()=> {
             return {
-                id: rando.posInt(),
-                time: Date.now(),
+                userId: rando.posInt(),
+                commentId: rando.posInt(),
+                timePosted: Date.now(),
                 parent: 0,
                 username: rando.username(),
                 content: rando.numSentences(1,5),
                 hidden: false,
                 removed: false,
-                troll: {
-                    ups: rando.num(10),
-                    downs: rando.num(10),
-                    alreadyVoted: rando.nearZero()
-                },
                 funny: {
                     ups: rando.num(10),
                     downs: rando.num(10),
@@ -73,7 +65,7 @@ export class TestCafeComment extends DRTestWindow<Server.Comment>{
                     downs: rando.num(10),
                     alreadyVoted: rando.nearZero()
                 }
-            }
+            } as Server.Comment
         }, CafeComment)
         
     }

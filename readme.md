@@ -8,9 +8,9 @@ Clone this repo
 
 Run `npm i` to install dependencies
 
-Run `npm run build` to build the extension: it will be in `./dist`
+Run `tsc` or `npx tsc` to transpile to javascript, in the intermdiate `js` folder
 
-Run `npm run test` to run unit tests (not yet implemented)
+Run `webpack` or `npx webpack` to pack it in the final `dist` folder
 
 # Run the debug/test page.
 

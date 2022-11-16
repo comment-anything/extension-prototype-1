@@ -1,26 +1,26 @@
-import { TestDomLogs } from "./domlogs";
-import { DRTestWindow } from "./DRTestWindow";
+import { TestDomLogs } from "../src/tests/domlogs";
+import { DRTestWindow } from "../src/tests/DRTestWindow";
 
 
-import { Server } from "../SERVER_DATA";
-import { CafeCommentReport } from "../CafeCommentReport";
-import { CafeEventHandle } from "../Events";
-import { rando } from "./rando";
+import { Server } from "../src/SERVER";
+import { CafeCommentReport } from "./CafeCommentReport";
+import { CafeEventHandle } from "../src/Events";
+import { rando } from "../src/tests/rando";
 
 export class TestCafeCommentReport extends DRTestWindow<Server.CommentReport>{
     constructor() {
         super()
         this.bindStamper({
-            Id: 100,
-            ReportingUserId: 6,
-            ReportingUsername: "LBytes",
-            TimeReported: Date.now(),
-            Reason: "This comment stank.",
-            CommentData: {
-                id: 45,
+            reportId: 100,
+            reportingUserId: 6,
+            reportingUsername: "LBytes",
+            timeReported: Date.now(),
+            reasonReported: "This comment stank.",
+            commentData: {
+                commentId: 45,
                 parent: 0,
                 username: "booger",
-                time: Date.now()-1000*60*30,
+                timePosted: Date.now()-1000*60*30,
                 content: "Sonic stinks.",
                 hidden: false,
                 removed: false,
@@ -37,13 +37,13 @@ export class TestCafeCommentReport extends DRTestWindow<Server.CommentReport>{
 
         this.bindRandomizer( ()=> {
             return {
-                Id: rando.posInt(),
-                ReportingUserId: rando.posInt(),
-                ReportingUsername: rando.username(),
-                TimeReported: Date.now(),
-                Reason: rando.numSentences(0, 10),
-                CommentData: {id: rando.posInt(),
-                    time: Date.now(),
+                reportId: rando.posInt(),
+                reportingUserId: rando.posInt(),
+                reportingUsername: rando.username(),
+                timeReported: Date.now(),
+                reasonReported: rando.numSentences(0, 10),
+                commentData: {commentId: rando.posInt(),
+                    timePosted: Date.now(),
                     parent: 0,
                     username: rando.username(),
                     content: rando.numSentences(1,5),

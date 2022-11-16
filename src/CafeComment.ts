@@ -1,4 +1,4 @@
-import { Server } from "./SERVER_DATA"
+import { Server } from "./SERVER"
 import { dom } from "./utility/dom"
 import { UIInput } from "./UIInput"
 import { CafeEvent, CafeEventHandle, CommentVoteTypes } from "./Events"
@@ -18,12 +18,11 @@ export class CafeComment extends UIInput{
     submitButton: HTMLButtonElement
     funny: CafeCommentVoter
     factual: CafeCommentVoter
-    troll: CafeCommentVoter
     agree: CafeCommentVoter
     constructor(data: Server.Comment) {
         super()
         this.el.classList.add(CafeCommentCSS)
-        this.commentId = data.id
+        this.commentId = data.commentId
         this.username = dom.div(data.username)
         this.text = dom.div(data.content)
         this.replyButton = dom.button("reply")
@@ -36,10 +35,9 @@ export class CafeComment extends UIInput{
 
         this.funny = new CafeCommentVoter("funny", data.funny)
         this.factual = new CafeCommentVoter("factual", data.factual)
-        this.troll = new CafeCommentVoter("troll", data.troll)
         this.agree = new CafeCommentVoter("agree", data.agree)
 
-        this.el.append(this.funny.el, this.factual.el, this.troll.el, this.agree.el)
+        this.el.append(this.funny.el, this.factual.el, this.agree.el)
 
         // show and hide the reply box
         function replyClicked(e:MouseEvent) {
@@ -72,21 +70,27 @@ export class CafeComment extends UIInput{
         this.funny.destroy()
         this.factual.destroy()
         this.agree.destroy()
-        this.troll.destroy()
         super.destroy()
     }
 }
 
+/**
+ * Todo: Fix CafeCommentVoter
+ * 
+ * How does it get the commentId? It needs to be constructed with it or set.
+ * 
+ * Factory pattern? 
+ */
 
 class CafeCommentVoter extends UIInput{
     commentId: number
     name: CommentVoteTypes
-    data: Server.CommentVotes
+    data: Server.CommentVoteDimension
     nameLabel: HTMLLabelElement
     up: HTMLButtonElement
     total: HTMLSpanElement
     down: HTMLButtonElement
-    constructor(name:CommentVoteTypes, votes:Server.CommentVotes) {
+    constructor(name:CommentVoteTypes, votes:Server.CommentVoteDimension) {
         super()
         this.el.classList.add(VoterCSS)
         this.el.style.display = "inline-block"

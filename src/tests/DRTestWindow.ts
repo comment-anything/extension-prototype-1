@@ -6,7 +6,7 @@
  * These classes should all be capable of unit tests.
  */
 
-import { Server } from "../SERVER_DATA";
+import { Server } from "../SERVER";
 import { dom } from "../utility/dom";
 import { TestDomLogs } from "./domlogs";
 

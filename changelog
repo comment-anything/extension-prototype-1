@@ -1,0 +1,7 @@
+
+klm127 - 2022-11-15 
+
+    Added Server to Client data types from Specifications Document.
+    Deleted CafeCommentReport and TestCafeCommentReport.
+    source maps allow better browser debugging.
+    Started several docs.

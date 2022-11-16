@@ -1,8 +1,8 @@
-import { CafeComment } from "./CafeComment";
-import { CafeEvent, CafeEventHandle, CommentReportActions } from "./Events";
-import { Server } from "./SERVER_DATA";
-import { UIInput } from "./UIInput";
-import { dom } from "./utility/dom";
+import { CafeComment } from "../src/CafeComment";
+import { CafeEvent, CafeEventHandle, CommentReportActions } from "../src/Events";
+import { Server } from "../src/SERVER";
+import { UIInput } from "../src/UIInput";
+import { dom } from "../src/utility/dom";
 
 const cssClass = "cafeModReport"
 export class CafeCommentReport extends UIInput {
@@ -25,11 +25,11 @@ export class CafeCommentReport extends UIInput {
         super()
         CafeCommentReport.setCSS(this.el)
         this.data = data
-        this.cafeComment = new CafeComment(data.CommentData)
+        this.cafeComment = new CafeComment(data.commentData)
         let reportContainer = dom.div(undefined, )
         this.el.append(this.cafeComment.el, reportContainer)
-        let reportingUser = dom.div(data.ReportingUsername)
-        let reportContent = dom.div(data.Reason)
+        let reportingUser = dom.div(data.reportingUsername)
+        let reportContent = dom.div(data.reasonReported)
         reportContainer.append(reportingUser, reportContent)
         this.el.append(reportContainer)
 
