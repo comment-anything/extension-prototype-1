@@ -6,7 +6,7 @@ module.exports = {
     mode:"production",
     entry: {
         popup: "./js/popup.js",
-        background: "./js/background.js",
+        //background: "./js/background.js",
         tester: "./js/tests/testEntry.js"
     },
     output: {
