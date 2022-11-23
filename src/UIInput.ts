@@ -1,11 +1,13 @@
 import { dom } from "./utility/dom"
 
-export class UIInput{
+export class UIInput<T>{
+    data: T
     el: HTMLElement
     blocker: HTMLElement
     listeners: Array<[HTMLElement, (e:any)=>any, string]>
     dispatchCafeEvent: ()=> void
-    constructor() {
+    constructor(data: T) {
+        this.data = data
         this.el = dom.div(undefined, undefined, {"position":"relative", "zIndex": "0"})
         this.blocker = dom.div(undefined, undefined, {"position":"absolute", "top":"0px", "left":"0px", "width":"100%", "height":"100%", "zIndex":"-1"})
         this.el.append(this.blocker)

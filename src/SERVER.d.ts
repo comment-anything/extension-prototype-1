@@ -73,7 +73,7 @@ export namespace Server {
     type FeedbackRecord = {
         id: number
         submittedAt: number
-        type: string
+        feedbackType: string
         userId: number
         username: string
         content: string
@@ -105,9 +105,13 @@ export namespace Server {
     type BanRecord = {
         banRecordId: number
         bannedUserId: number
+        bannedByUserID: number
+        bannedByUsername: string
         bannedUsername: string
         bannedFrom: string
-        setBannedTo: number
+        bannedAt: number
+        reason: string
+        setBannedTo: boolean
     }
     type LoginResponse = {
         loggedInAs: UserProfile

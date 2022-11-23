@@ -8,7 +8,7 @@ const CafeCommentCSS = "cafeComment"
 const VoterCSS = "cafeCommentVoter"
 
 
-export class CafeComment extends UIInput{
+export class CafeComment extends UIInput<Server.Comment>{
     commentId: number
     username: HTMLDivElement
     text: HTMLDivElement
@@ -20,7 +20,7 @@ export class CafeComment extends UIInput{
     factual: CafeCommentVoter
     agree: CafeCommentVoter
     constructor(data: Server.Comment) {
-        super()
+        super(data)
         this.el.classList.add(CafeCommentCSS)
         this.commentId = data.commentId
         this.username = dom.div(data.username)
@@ -82,7 +82,7 @@ export class CafeComment extends UIInput{
  * Factory pattern? 
  */
 
-class CafeCommentVoter extends UIInput{
+class CafeCommentVoter extends UIInput<Server.CommentVoteDimension>{
     commentId: number
     name: CommentVoteTypes
     data: Server.CommentVoteDimension
@@ -91,7 +91,7 @@ class CafeCommentVoter extends UIInput{
     total: HTMLSpanElement
     down: HTMLButtonElement
     constructor(name:CommentVoteTypes, votes:Server.CommentVoteDimension) {
-        super()
+        super(votes)
         this.el.classList.add(VoterCSS)
         this.el.style.display = "inline-block"
         let innerel = dom.div("","",{"display":"grid"})
