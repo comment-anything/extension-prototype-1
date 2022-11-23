@@ -11,28 +11,28 @@ export class TestCafeComment extends DRTestWindow<Server.Comment>{
     constructor() {
         super()
         this.bindStamper({
-            userId: 10,
-            commentId: 1,
-            timePosted: Date.now(),
-            parent: 0,
-            username: "Sven",
-            content: "I've written a comment.",
-            hidden: false,
-            removed: false,
-            funny: {
-                ups: 0,
-                downs: 0,
-                alreadyVoted: 0
+            UserId: 10,
+            CommentId: 1,
+            TimePosted: Date.now(),
+            Parent: 0,
+            Username: "Sven",
+            Content: "I've written a comment.",
+            Hidden: false,
+            Removed: false,
+            Funny: {
+                Ups: 0,
+                Downs: 0,
+                AlreadyVoted: 0
             },
-            factual: {
-                ups: 3,
-                downs: 0,
-                alreadyVoted: 0
+            Factual: {
+                Ups: 3,
+                Downs: 0,
+                AlreadyVoted: 0
             },
-            agree: {
-                ups: 0,
-                downs: 3,
-                alreadyVoted: 1
+            Agree: {
+                Ups: 0,
+                Downs: 3,
+                AlreadyVoted: 1
             }
         } as Server.Comment, CafeComment)
         document.addEventListener(CafeEventHandle, (e:any)=> {
@@ -42,28 +42,28 @@ export class TestCafeComment extends DRTestWindow<Server.Comment>{
 
         this.bindRandomizer(()=> {
             return {
-                userId: rando.posInt(),
-                commentId: rando.posInt(),
-                timePosted: Date.now(),
-                parent: 0,
-                username: rando.username(),
-                content: rando.numSentences(1,5),
-                hidden: false,
-                removed: false,
-                funny: {
-                    ups: rando.num(10),
-                    downs: rando.num(10),
-                    alreadyVoted: rando.nearZero()
+                UserId: rando.posInt(),
+                CommentId: rando.posInt(),
+                TimePosted: Date.now(),
+                Parent: 0,
+                Username: rando.username(),
+                Content: rando.numSentences(1,5),
+                Hidden: false,
+                Removed: false,
+                Funny: {
+                    Ups: rando.num(10),
+                    Downs: rando.num(10),
+                    AlreadyVoted: rando.nearZero()
                 },
-                factual: {
-                    ups: rando.num(10),
-                    downs: rando.num(10),
-                    alreadyVoted: rando.nearZero()
+                Factual: {
+                    Ups: rando.num(10),
+                    Downs: rando.num(10),
+                    AlreadyVoted: rando.nearZero()
                 },
-                agree: {
-                    ups: rando.num(10),
-                    downs: rando.num(10),
-                    alreadyVoted: rando.nearZero()
+                Agree: {
+                    Ups: rando.num(10),
+                    Downs: rando.num(10),
+                    AlreadyVoted: rando.nearZero()
                 }
             } as Server.Comment
         }, CafeComment)

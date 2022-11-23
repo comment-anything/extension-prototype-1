@@ -6,114 +6,122 @@
  */
 
 export namespace Server {
-    type Comment = {
-        commentId: number,
-        parent: number
-        userId: number
-        username: string
-        timePosted: number
-        content: string 
-        hidden: boolean
-        removed: boolean
-        funny: CommentVoteDimension
-        factual: CommentVoteDimension
-        agree: CommentVoteDimension
+    type Comment = { // e
+        CommentId: number,
+        Parent: number
+        UserId: number
+        Username: string
+        TimePosted: number
+        Content: string 
+        Hidden: boolean
+        Removed: boolean
+        Funny: CommentVoteDimension
+        Factual: CommentVoteDimension
+        Agree: CommentVoteDimension
     }
-    type CommentVoteDimension = {
-        ups: number
-        downs: number
-        alreadyVoted: -1 | 0 | 1
+    
+    type CommentVoteDimension = { // e
+        Ups: number
+        Downs: number
+        AlreadyVoted: -1 | 0 | 1
     }
 
     type CommentReport = {
-        reportId: number
-        reportingUserId: number
-        reportingUsername: string
-        timeReported: number
-        reasonReported: string
-        actionTaken: string
-        commentData: Server.Comment
+        ReportId: number
+        ReportingUserId: number
+        ReportingUsername: string
+        TimeReported: number
+        ReasonReported: string
+        ActionTaken: string
+        CommentData: Server.Comment
     }
 
     type ModerationRecord = {
-        moderationRecordId: number
-        moderatorUserId: number
-        moderatorUsername: string
-        timeModerated: number
-        reason: string
-        setHiddenTo: boolean
-        setRemovedTo: boolean
-        associatedReport: Server.CommentReport
+        ModerationRecordId: number
+        ModeratorUserId: number
+        ModeratorUsername: string
+        TimeModerated: number
+        Reason: string
+        SetHiddenTo: boolean
+        SetRemovedTo: boolean
+        AssociatedReport: Server.CommentReport
     }
 
     type UserProfile = {
-        userId: number
-        username: string
-        profileBlurb: string
-        createdOn: number
-        isAdmin: boolean
-        isGlobalModerator: boolean
-        isDomainModerator: boolean
-        domainsModerating: string[]
+        UserId: number
+        Username: string
+        ProfileBlurb: string
+        CreatedOn: number
+        IsAdmin: boolean
+        IsGlobalModerator: boolean
+        IsDomainModerator: boolean
+        DomainsModerating: string[]
     }
 
     type AdminUsersReport = {
-        userCount: number
-        loggedInUserCount: number
-        newestUserId: number
-        newestUsername: string
+        UserCount: number
+        LoggedInUserCount: number
+        NewestUserId: number
+        NewestUsername: string
     }
+    
     type AdminAccessLog = {
-        logId: number
-        ip: string
-        url: string
-        userId: number
-        username: string
+        LogId: number
+        Ip: string
+        Url: string
+        UserId: number
+        Username: string
     }
+    
     type FeedbackRecord = {
-        id: number
-        submittedAt: number
-        feedbackType: string
-        userId: number
-        username: string
-        content: string
-        hide: boolean
+        Id: number
+        SubmittedAt: number
+        FeedbackType: string
+        UserId: number
+        Username: string
+        Content: string
+        Hide: boolean
     }
+    
     type GlobalModeratorRecord = {
-        recordId: number
-        grantedBy: number
-        grantedByUsername: string
-        grantedTo: number
-        grantedToUsername: string
-        grantedAt: number 
+        RecordId: number
+        GrantedBy: number
+        GrantedByUsername: string
+        GrantedTo: number
+        GrantedToUsername: string
+        GrantedAt: number 
     }
 
     type AdminDomainReport = {
-        domain: string
-        commentCount: number
+        Domain: string
+        CommentCount: number
     }
 
     type DomainModeratorRecord = {
-        recordId: number
-        domain: string
-        grantedBy: number
-        grantedByUsername: string
-        grantedTo: number
-        grantedToUsername: string
-        grantedAt: number 
+        RecordId: number
+        Domain: string
+        GrantedBy: number
+        GrantedByUsername: string
+        GrantedTo: number
+        GrantedToUsername: string
+        GrantedAt: number 
     }
-    type BanRecord = {
-        banRecordId: number
-        bannedUserId: number
-        bannedByUserID: number
-        bannedByUsername: string
-        bannedUsername: string
-        bannedFrom: string
-        bannedAt: number
-        reason: string
-        setBannedTo: boolean
+    
+    type BanRecord = { // e
+        BanRecordId: number
+        BannedUserId: number
+        BannedByUserID: number
+        BannedByUsername: string
+        BannedUsername: string
+        BannedFrom: string
+        BannedAt: number
+        Reason: string
+        SetBannedTo: boolean
     }
+    
     type LoginResponse = {
-        loggedInAs: UserProfile
+        LoggedInAs: UserProfile
     }
+    
+    type LogoutResponse = {}
 }

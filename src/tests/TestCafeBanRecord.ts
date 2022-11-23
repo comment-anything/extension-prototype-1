@@ -12,15 +12,15 @@ export class TestCafeBanRecord extends DRTestWindow<Server.BanRecord>{
     constructor() {
         super()
         this.bindStamper({
-            banRecordId: 1,
-            bannedUserId: 10,
-            bannedByUserID: 2,
-            bannedByUsername: "Lbytes32",
-            bannedUsername: "Douchenozzle32",
-            bannedFrom: null,
-            setBannedTo: true,
-            bannedAt: 100000,
-            reason: "I don't like him!"
+            BanRecordId: 1,
+            BannedUserId: 10,
+            BannedByUserID: 2,
+            BannedByUsername: "Lbytes32",
+            BannedUsername: "Douchenozzle32",
+            BannedFrom: null,
+            SetBannedTo: true,
+            BannedAt: 100000,
+            Reason: "I don't like him!"
         } as Server.BanRecord, CafeBanRecord)
         document.addEventListener(CafeEventHandle, (e:any)=> {
             this.logs.log("Received an event of type " + CafeEventHandle)
@@ -29,15 +29,15 @@ export class TestCafeBanRecord extends DRTestWindow<Server.BanRecord>{
 
         this.bindRandomizer(()=> {
             return {
-                banRecordId: rando.num(1000),
-                bannedUserId: rando.num(1000),
-                bannedByUserID: rando.num(1000),
-                bannedByUsername: rando.username(),
-                bannedUsername: rando.username(),
-                bannedAt: rando.num(10000000),
-                reason: rando.sentence(),
-                bannedFrom: null, // need to create rando.domain, rando.nullDomain 
-                setBannedTo: true // need to create rando.bool              
+                BanRecordId: rando.num(1000),
+                BannedUserId: rando.num(1000),
+                BannedByUserID: rando.num(1000),
+                BannedByUsername: rando.username(),
+                BannedUsername: rando.username(),
+                BannedAt: rando.num(10000000),
+                Reason: rando.sentence(),
+                BannedFrom: null, // need to create rando.domain, rando.nullDomain 
+                SetBannedTo: true // need to create rando.bool              
             } as Server.BanRecord
         }, CafeBanRecord)
         

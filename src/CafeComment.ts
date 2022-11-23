@@ -22,9 +22,9 @@ export class CafeComment extends UIInput<Server.Comment>{
     constructor(data: Server.Comment) {
         super(data)
         this.el.classList.add(CafeCommentCSS)
-        this.commentId = data.commentId
-        this.username = dom.div(data.username)
-        this.text = dom.div(data.content)
+        this.commentId = data.CommentId
+        this.username = dom.div(data.Username)
+        this.text = dom.div(data.Content)
         this.replyButton = dom.button("reply")
         let replyContainer = dom.div(undefined, "", {"display":"none"})
         this.replyBox = dom.el("textarea")
@@ -33,9 +33,9 @@ export class CafeComment extends UIInput<Server.Comment>{
         this.childrenContainer = dom.div()
         this.el.append(this.username, this.text, this.replyButton, replyContainer, this.childrenContainer)
 
-        this.funny = new CafeCommentVoter("funny", data.funny)
-        this.factual = new CafeCommentVoter("factual", data.factual)
-        this.agree = new CafeCommentVoter("agree", data.agree)
+        this.funny = new CafeCommentVoter("funny", data.Funny)
+        this.factual = new CafeCommentVoter("factual", data.Factual)
+        this.agree = new CafeCommentVoter("agree", data.Agree)
 
         this.el.append(this.funny.el, this.factual.el, this.agree.el)
 
@@ -99,16 +99,16 @@ class CafeCommentVoter extends UIInput<Server.CommentVoteDimension>{
         this.data = votes
         this.nameLabel = dom.textEl("label", name, "", {"gridRow":"1"})
         this.up = dom.button("+", "", {"gridRow":"2"})
-        this.total = dom.span( (votes.ups - votes.downs).toString(), "", {"gridRow":"3"})
+        this.total = dom.span( (votes.Ups - votes.Downs).toString(), "", {"gridRow":"3"})
         this.down = dom.button("-", "", {"gridRow":"4"})
         innerel.append(this.nameLabel, this.up, this.total, this.down)
         this.el.append(innerel)
 
-        if(this.data.alreadyVoted >= 0) {
+        if(this.data.AlreadyVoted >= 0) {
             let cb = this.getDispatcher(false)
             this.clickListen(this.down, cb)
         }
-        if(this.data.alreadyVoted <= 0) {
+        if(this.data.AlreadyVoted <= 0) {
             let cb =this.getDispatcher(true)
             this.clickListen(this.up, cb)
         }

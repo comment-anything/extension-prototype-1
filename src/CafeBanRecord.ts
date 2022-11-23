@@ -15,13 +15,13 @@ export class CafeBanRecord extends UIInput<Server.BanRecord>{
         this.el.classList.add(CSSClass)
         this.el.style
         let targetLabel = dom.div("Banned")
-        this.bannedTarget = dom.div(this.data.bannedUsername, "cafeColumn2")
+        this.bannedTarget = dom.div(this.data.BannedUsername, "cafeColumn2")
         let byLabel = dom.div("By")
-        this.bannedBy = dom.div(this.data.bannedByUsername, "cafeColumn2")
+        this.bannedBy = dom.div(this.data.BannedByUsername, "cafeColumn2")
         let dateLabel = dom.div("At")
-        this.bannedAt = dom.div( (new Date(this.data.bannedAt)).toUTCString(), "cafeColumn2")
+        this.bannedAt = dom.div( (new Date(this.data.BannedAt)).toUTCString(), "cafeColumn2")
         let reasonLabel = dom.div("Reason")
-        this.reason = dom.div(this.data.reason, "cafeColumn2")
+        this.reason = dom.div(this.data.Reason, "cafeColumn2")
         this.el.append(targetLabel, this.bannedTarget, byLabel, this.bannedBy, dateLabel, this.bannedAt, reasonLabel, this.reason)
     }
 
