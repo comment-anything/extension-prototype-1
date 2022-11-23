@@ -39,7 +39,7 @@ class Log {
         this.el = dom.div("","",{"color":"darkred"})
         let time = ""+new Date()
         this.content = dom.span(text)
-        this.xBut = dom.button("❌")
+        this.xBut = dom.button("✖")
         this.xBut.addEventListener("click", this.xClick.bind(this))
         this.el.append(this.xBut, this.content)
     }
