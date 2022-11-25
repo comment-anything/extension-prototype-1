@@ -1,4 +1,5 @@
 import { Server } from "./SERVER";
+import { Settings } from "./Settings";
 import { UIInput } from "./UIInput";
 
 
@@ -35,22 +36,29 @@ export class CafeLogDisplay extends UIInput<Server.AdminAccessLog> {
 
 }
 
-export class ModRecordsDisplay extends UIInput<Server.ModerationRecord> {
+export class CafeModRecordsDisplay extends UIInput<Server.ModerationRecord> {
 
 }
 
-export class GlobalModDisplay extends UIInput<Server.GlobalModeratorRecord> {
+export class CafeGlobalModDisplay extends UIInput<Server.GlobalModeratorRecord> {
 
 }
 
-export class DomainModDisplay extends UIInput<Server.DomainModeratorRecord> {
+export class CafeDomainModDisplay extends UIInput<Server.DomainModeratorRecord> {
 
 }
 
-export class DomainReportDisplay extends UIInput<Server.AdminDomainReport> {
+export class CafeDomainReportDisplay extends UIInput<Server.AdminDomainReport> {
 
 }
 
-export class UsersReportDisplay extends UIInput<Server.AdminUsersReport> {
+export class CafeUsersReportDisplay extends UIInput<Server.AdminUsersReport> {
 
+}
+
+export class CafeCommentSortDisplay extends UIInput<Settings> {
+
+    updateFromSettings(settings:Settings) {
+        
+    }
 }

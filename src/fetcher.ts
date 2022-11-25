@@ -75,7 +75,7 @@ export class Fetcher {
     constructor() {
         this.responses = []         
     }
-    fetch<T extends keyof ClientMap>(eventAndApiEndpoint: T, data: ClientMap[T]) {
+    fetch<T extends keyof ClientMap>(eventAndApiEndpoint: T, data: ClientMap[T], callback:()=>void) {
         //
     }
 

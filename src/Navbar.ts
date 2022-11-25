@@ -1,6 +1,6 @@
 import { CafeMessageDisplay, CafeUserDisplay } from "./Boundaries";
 import { Server } from "./SERVER";
-import { CafeState } from "./State";
+import { State } from "./State";
 import { CafeAdminWindow, CafeCommentsWindow, CafeLoginWindow, CafeModerationWindow, CafePWResetWindow, CafeRegisterWindow, CafeSettingsWindow } from "./Windows";
 
 export class CafeNavbar {
@@ -20,7 +20,7 @@ export class CafeNavbar {
     constructor() {
     }
 
-    setAvailableFromState(state:CafeState) {
+    setFromState(state:State) {
 
     }
     displayMessage(data:Server.Message) {

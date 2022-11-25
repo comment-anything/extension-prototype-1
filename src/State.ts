@@ -1,6 +1,6 @@
 import { Server } from "./SERVER"
 
-type state_key = 
+export type state_key = 
     "comments_display" |
     "register_form" |
     "login_form" |
@@ -12,7 +12,7 @@ type state_key =
     "reports_display"
 
 
-export class CafeState {
+export class State {
     viewing: state_key
     own_profile?: Server.UserProfile
     constructor() {

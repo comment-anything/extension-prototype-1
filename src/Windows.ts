@@ -1,5 +1,8 @@
-import { CafeFeedbackDisplay, DomainReportDisplay, UsersReportDisplay } from "./Boundaries";
+import { CafeFeedbackDisplay, CafeDomainReportDisplay, CafeUsersReportDisplay, CafeCommentSortDisplay } from "./Boundaries";
+import { CafeComment } from "./CafeComment";
 import { Server } from "./SERVER";
+import { Settings } from "./Settings";
+import { UIInput } from "./UIInput";
 
 
 
@@ -8,15 +11,34 @@ export class CafeWindow {
 }
 
 export class CafeCommentsWindow extends CafeWindow {
+
+    lastSettings?: Settings
+    displayedComments: CafeComment[]
+    commentSortSettings: CafeCommentSortDisplay
+
     populateNewComments(d: Server.Comment[]) {
 
     }
     updateComment(d: Server.Comment) {
 
     }
+    resortComments() {
+
+    }
+    updateFromSettings(settings:Settings) {
+        this.lastSettings = settings
+        this.commentSortSettings.updateFromSettings(settings)
+        this.resortComments()
+    }
 }
 
 export class CafeSettingsWindow extends CafeWindow {
+
+    commentSortSettings: CafeCommentSortDisplay
+
+    updateFromSettings(settings:Settings) {
+        this.commentSortSettings.updateFromSettings(settings)
+    }
 
 }
 
@@ -33,8 +55,8 @@ export class CafeAdminWindow extends CafeWindow {
 
     feedbackReport: FeedbackReportSection
     logs: LogsSection
-    domainReports: DomainReportDisplay[]
-    userReport: UsersReportDisplay
+    domainReports: CafeDomainReportDisplay[]
+    userReport: CafeUsersReportDisplay
 
     showDomainReport(d: Server.AdminDomainReport) {
 

@@ -1,4 +1,4 @@
-import { CafeMessageDisplay, CafeOwnProfileDisplay, CafeUserDisplay, DomainReportDisplay } from "./Boundaries";
+import { CafeMessageDisplay, CafeOwnProfileDisplay, CafeUserDisplay, CafeDomainReportDisplay } from "./Boundaries";
 import { Cafe } from "./cafe";
 import { ServerMap, ServerResponse } from "./fetcher";
 import { CafeNavbar } from "./Navbar";
