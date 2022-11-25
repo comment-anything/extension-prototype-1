@@ -3,7 +3,7 @@ import { Cafe } from "./cafe";
 import { ServerMap, ServerResponse } from "./fetcher";
 import { CafeNavbar } from "./Navbar";
 import { Server } from "./SERVER";
-import { BanRecordsSection, CafeAdminWindow, CafeCommentsWindow, CafePWResetWindow, CommentReportsSection, FeedbackReportSection, LogsSection, ModActionsReportSection, ModeratorsReportSection } from "./Windows";
+import { BanRecordsSection, CafeAdminWindow, CafeCommentsWindow, CafePWResetCodeWindow, CommentReportsSection, FeedbackReportSection, LogsSection, ModActionsReportSection, ModeratorsReportSection } from "./Windows";
 
 // Dispatcher is responsible for parsing an array of server responses and dispatching them to the appropriate objects around the front end for rendering to the user. 
 export class Dispatcher {
@@ -42,10 +42,10 @@ export class Dispatcher {
                     this.dispatchLogoutResponse(datum.d as Server.LogoutResponse, cafe)
                     break;
                 case "PwResetCodeResponse":
-                    this.dispatchPwResetCodeResponse(datum.d as {}, cafe.navbar.pwResetWindow)
+                    this.dispatchPwResetCodeResponse(datum.d as {}, cafe)
                     break;
                 case "PwResetReqResponse":
-                    this.dispatchPwResetReqResponse(datum.d as {}, cafe.navbar)
+                    this.dispatchPwResetReqResponse(datum.d as {}, cafe)
                     break;
                 case "VerifyResponse":
                     this.dispatchVerifyResponse(datum.d as {}, cafe.navbar.globalMessage)
@@ -126,14 +126,14 @@ export class Dispatcher {
         targ.userChange(d)
     }
 
-    // dispatchPwResetCodeResponse calls displayResetCodeInput on a CafePWResetWindow.
-    dispatchPwResetCodeResponse(d: {}, targ:CafePWResetWindow) {
-        targ.displayResetCodeInput()
+    // dispatchPwResetCodeResponse calls cafe.changeState to the appropriate state, for inputting a new password.
+    dispatchPwResetCodeResponse(d: {}, targ:Cafe) {
+        targ.changeState("input_new_pw_form")
     }
 
     // dispatchPwResetReqResponse calls showPWResetWindow on CafeNavbar.
-    dispatchPwResetReqResponse(d: {}, targ:CafeNavbar) {
-        targ.showPWResetWindow()
+    dispatchPwResetReqResponse(d: {}, targ:Cafe) {
+        targ.changeState("input_pw_reset_code_form")
     }
 
     // dispatchReqVerificationResponse calls updateMessage on a CafeMessageDisplay indicating that a verification email has been dispatched.
