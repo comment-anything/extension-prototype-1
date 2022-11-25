@@ -137,7 +137,7 @@ export namespace Server {
     type CommentVoteDimension = {
 
         // Whether the user requesting the data has already voted on the comment. It will be -1 if they have already voted down, 0 if they have not voted, and 1 if they have already voted up.
-        AlreadyVoted : boolean
+        AlreadyVoted : number
 
         // The number of downvotes on the comment.
         Downs : number
