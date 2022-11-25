@@ -1,5 +1,21 @@
 
 export namespace Client {
+
+	// AssignDomainModerator is dispatched when a global moderator or administrator assigns a new domain moderator.
+	type AssignDomainModerator = {
+		// The user ID that will be given domain moderator status
+		AssignTo: number
+		// The domain they will be moderating.
+		Domain: string
+	}
+
+	// AssignGlobalModerator is dispatched when an administrator assigns a new global moderator.
+	type AssignGlobalModerator = {
+		// The user ID that will be given global moderator status
+		AssignTo: number
+	}
+
+
 // Ban is dispatched when a moderator or administrator bans a user.
 	type Ban = {
 		// The user ID that will be banned.
