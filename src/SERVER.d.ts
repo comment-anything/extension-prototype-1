@@ -6,7 +6,7 @@
  */
 
 export namespace Server {
-    type Comment = { // e
+    type Comment = {
         CommentId: number,
         Parent: number
         UserId: number
@@ -20,7 +20,7 @@ export namespace Server {
         Agree: CommentVoteDimension
     }
     
-    type CommentVoteDimension = { // e
+    type CommentVoteDimension = {
         Ups: number
         Downs: number
         AlreadyVoted: -1 | 0 | 1
@@ -107,7 +107,7 @@ export namespace Server {
         GrantedAt: number 
     }
     
-    type BanRecord = { // e
+    type BanRecord = {
         BanRecordId: number
         BannedUserId: number
         BannedByUserID: number
