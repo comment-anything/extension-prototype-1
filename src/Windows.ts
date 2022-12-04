@@ -2,23 +2,30 @@ import { CafeFeedbackDisplay, CafeDomainReportDisplay, CafeUsersReportDisplay, C
 import { CafeBanRecord } from "./CafeBanRecord";
 import { CafeComment } from "./CafeComment";
 import { Server } from "./SERVER";
-import { Settings } from "./Settings";
+import { CafeSettings } from "./Settings";
 import { UIInput } from "./UIInput";
 
 
 
+// CafeWindow is the base class for all CafeWindows. CafeWindows hold all the content of CommentAnywhere, except for the navbar buttons and message. They correspond to the frond end states. Only one CafeWindow is visible at any given time, and is displayed and hidden by the CafeNavBar instance.
 export class CafeWindow {
+
+    el: HTMLDivElement
+
+    // displays the window
+    show() {}
+
+    // hides the window
+    hide() {}
 
 }
 
 // CafeCommentsWindow displays all comments for the current page. It is responsible for repopulating with new comments when comments for a new page are retrieved and updating comments as new ones are added and voted on.
 export class CafeCommentsWindow extends CafeWindow {
 
-    el: HTMLDivElement
-
     data: Server.Comment[]
 
-    lastSettings?: Settings
+    lastSettings?: CafeSettings
     displayedComments: Map<number, CafeComment>
     commentSortSettings: CafeCommentSortDisplay
 
@@ -38,7 +45,7 @@ export class CafeCommentsWindow extends CafeWindow {
     }
 
     // updateFromSettings updates the lastSettings field in CommentsWindow and calls resortComments.
-    updateFromSettings(settings:Settings) {
+    updateFromSettings(settings:CafeSettings) {
         this.lastSettings = settings
         this.commentSortSettings.updateFromSettings(settings)
         this.resortComments()
@@ -57,7 +64,7 @@ export class CafeSettingsWindow extends CafeWindow {
     verifyCodeSubmit: HTMLInputElement
 
     // updateFromSettings is called when the settings object is updated. updateFromSettings is called on the commentSortSettings UIInput member of CafeSettingsWindow.
-    updateFromSettings(settings:Settings) {
+    updateFromSettings(settings:CafeSettings) {
         this.commentSortSettings.updateFromSettings(settings)
     }
 

@@ -2,7 +2,7 @@ import { ClientMap, Fetcher, ServerMap } from "./fetcher";
 import { CafeNavbar } from "./Navbar";
 import { State, state_key } from "./State";
 import {Server} from "./SERVER"
-import { Settings } from "./Settings";
+import { CafeSettings } from "./Settings";
 import { Dispatcher } from "./dispatcher";
 
 /**
@@ -12,7 +12,7 @@ export class Cafe {
     fetcher: Fetcher
     state: State
     navbar: CafeNavbar
-    settings: Settings;
+    settings: CafeSettings;
     dispatcher: Dispatcher;
     current_url: string
     constructor() {
@@ -20,7 +20,7 @@ export class Cafe {
         this.dispatcher = new Dispatcher()
         this.state = new State()
         this.navbar = new CafeNavbar()
-        this.settings = new Settings()
+        this.settings = new CafeSettings()
         this.current_url = ""
         this.checkForResponses = this.checkForResponses.bind(this)
         this.fetcher.fetch("amILoggedIn",{}, this.checkForResponses)
@@ -67,7 +67,7 @@ export class Cafe {
     }
 
     // settingsEventReceived is called when a user changes their settings, such as when they they change whether comments are sorted by ascending or descending. It updates the settings object with the new data and tells the appropriate objects to update their displayed data based on the new settings.
-    settingsEventReceived(settings:Settings) {
+    settingsEventReceived(settings:CafeSettings) {
         this.settings.sortAscending = settings.sortAscending
         this.settings.sortBy = settings.sortBy
         this.settings.viewHidden = settings.viewHidden

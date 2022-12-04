@@ -14,20 +14,24 @@ export type state_key =
 
 export class State {
     viewing: state_key
-    own_profile?: Server.UserProfile
+    ownProfile?: Server.UserProfile
     constructor() {
         this.viewing = "comments_display"
     }
     loadProfile(d?: Server.UserProfile | {}) {
         if(d !== undefined) {
             if( (d as any).CreatedOn != undefined) {
-                this.own_profile = d as Server.UserProfile
+                this.ownProfile = d as Server.UserProfile
             }
             else {
-                this.own_profile = undefined
+                this.ownProfile = undefined
             }
         } else {
-            this.own_profile = undefined
+            this.ownProfile = undefined
         }
+    }
+
+    setViewingTo(d: state_key) {
+        this.viewing = d
     }
 }

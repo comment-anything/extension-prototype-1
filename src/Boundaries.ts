@@ -1,6 +1,6 @@
 import { CafeComment } from "./CafeComment";
 import { Server } from "./SERVER";
-import { Settings } from "./Settings";
+import { CafeSettings } from "./Settings";
 import { UIInput } from "./UIInput";
 
 
@@ -197,7 +197,7 @@ export class CafeUsersReportDisplay extends UIInput<Server.AdminUsersReport> {
 }
 
 // CafeCommentSortDisplay shows the users comment viewing settings and allows the user to change them.
-export class CafeCommentSortDisplay extends UIInput<Settings> {
+export class CafeCommentSortDisplay extends UIInput<CafeSettings> {
     sortBy: HTMLSelectElement
     viewHidden: HTMLInputElement
     sortAscending: HTMLInputElement
@@ -208,7 +208,7 @@ export class CafeCommentSortDisplay extends UIInput<Settings> {
     }
 
     // updateFromSettings causes the input elements to change to values set from a Settings object.
-    updateFromSettings(settings:Settings) {
+    updateFromSettings(settings:CafeSettings) {
         
     }
 }

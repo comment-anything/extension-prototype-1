@@ -69,7 +69,7 @@ export type ServerResponse<T extends keyof ServerMap> = {
 }
 
 
-
+// Fetcher is responsible for dispatching requests to the server at the appropriate API endpoints and populating its responses object with the server responses.
 export class Fetcher {
     responses: ServerResponse<keyof ServerMap>[];
     constructor() {
